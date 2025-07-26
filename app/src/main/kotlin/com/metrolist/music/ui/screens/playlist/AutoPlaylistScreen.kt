@@ -699,7 +699,7 @@ private fun AutoPlaylistCollapsingTopAppBar(
     // Calculate adaptive colors based on the background color using Player.kt logic
     val adaptiveColors = adaptiveTopBarColors(animatedColor)
 
-    val topBarColor = if (showTitle || inSelectMode || isSearching) animatedBackgroundColor else Color.Transparent
+    val topBarColor = if (showTitle || inSelectMode || isSearching) animatedColor else Color.Transparent
 
     TopAppBar(
         modifier = Modifier.background(topBarColor),

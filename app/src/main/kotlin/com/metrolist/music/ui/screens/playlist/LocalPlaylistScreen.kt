@@ -854,9 +854,7 @@ fun LocalPlaylistScreen(
         )
 
         // Calculate adaptive colors based on the background color using Player.kt logic
-        val adaptiveColors = remember(topBarAnimatedColor) {
-            adaptiveTopBarColors(topBarAnimatedColor)
-        }
+        val adaptiveColors = adaptiveTopBarColors(topBarAnimatedColor)
 
         TopAppBar(
             modifier = Modifier.background(topBarAnimatedColor),

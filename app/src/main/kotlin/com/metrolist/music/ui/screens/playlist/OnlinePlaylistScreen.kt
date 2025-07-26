@@ -581,7 +581,7 @@ private fun PlaylistCollapsingTopAppBar(
 
     TopAppBar(
         modifier = Modifier.background(animatedColor),
-        colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
+        colors = TopAppBarDefaults.topAppBarColors(containerColor = animatedColor),
         title = {
             when {
                 inSelectMode -> Text(

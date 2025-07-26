@@ -858,7 +858,7 @@ fun LocalPlaylistScreen(
 
         TopAppBar(
             modifier = Modifier.background(topBarAnimatedColor),
-            colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
+            colors = TopAppBarDefaults.topAppBarColors(containerColor = topBarAnimatedColor),
             title = {
                 if (inSelectMode) {
                     Text(

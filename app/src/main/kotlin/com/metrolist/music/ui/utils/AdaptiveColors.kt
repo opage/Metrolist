@@ -8,8 +8,8 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.core.graphics.ColorUtils
 
 /**
- * Calculates an adaptive text color based on the background color using the same logic as Player.kt
- * This ensures consistent color behavior across the app.
+ * Calculates an adaptive text color based on the background color with improved dark mode support.
+ * This ensures consistent color behavior across the app and better visibility in dark mode.
  * 
  * @param backgroundColor The background color to calculate contrast against
  * @return The appropriate text color (Color.White or Color.Black)
@@ -35,17 +35,33 @@ fun adaptiveTextColor(backgroundColor: Color): Color {
     
     val backgroundArgb = effectiveBackground.toArgb()
     
+    // Check if we're in dark mode
+    val isDarkMode = MaterialTheme.colorScheme.surface.luminance() < 0.5f
+    
     // Use the same logic as Player.kt for consistent behavior
     val whiteContrast = ColorUtils.calculateContrast(backgroundArgb, Color.White.toArgb())
     val blackContrast = ColorUtils.calculateContrast(backgroundArgb, Color.Black.toArgb())
     
-    return if (whiteContrast < 2f && blackContrast > 2f) {
-        Color.Black
-    } else if (whiteContrast > 2f && blackContrast < 2f) {
-        Color.White
+    // In dark mode, prefer white text for better visibility on light backgrounds
+    return if (isDarkMode) {
+        if (whiteContrast >= 2f) {
+            Color.White
+        } else if (blackContrast >= 2f) {
+            Color.Black
+        } else {
+            // Default to white in dark mode for better visibility
+            Color.White
+        }
     } else {
-        // Default fallback - use white for better visibility
-        Color.White
+        // In light mode, use original logic
+        if (whiteContrast < 2f && blackContrast > 2f) {
+            Color.Black
+        } else if (whiteContrast > 2f && blackContrast < 2f) {
+            Color.White
+        } else {
+            // Default fallback - use black for better visibility in light mode
+            Color.Black
+        }
     }
 }
 
@@ -96,8 +112,8 @@ fun adaptiveTopBarColors(backgroundColor: Color): AdaptiveTopBarColors {
     val titleColor = if (isDarkText) {
         // For dark text on light background
         if (isDarkMode) {
-            // In dark mode, use lighter colors for better contrast
-            MaterialTheme.colorScheme.onSurface.copy(alpha = 0.95f)
+            // In dark mode on light background, use white for better visibility
+            Color.White
         } else {
             MaterialTheme.colorScheme.onSurface
         }
@@ -115,8 +131,8 @@ fun adaptiveTopBarColors(backgroundColor: Color): AdaptiveTopBarColors {
     val subtitleColor = if (isDarkText) {
         // For dark text
         if (isDarkMode) {
-            // In dark mode, use lighter variant
-            MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.9f)
+            // In dark mode on light background, use white for better visibility
+            Color.White.copy(alpha = 0.9f)
         } else {
             MaterialTheme.colorScheme.onSurfaceVariant
         }
@@ -134,8 +150,8 @@ fun adaptiveTopBarColors(backgroundColor: Color): AdaptiveTopBarColors {
     val iconColor = if (isDarkText) {
         // For dark icons
         if (isDarkMode) {
-            // In dark mode, use lighter variant
-            MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.9f)
+            // In dark mode on light background, use white for better visibility
+            Color.White
         } else {
             MaterialTheme.colorScheme.onSurfaceVariant
         }

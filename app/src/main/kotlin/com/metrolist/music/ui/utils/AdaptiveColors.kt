@@ -66,8 +66,7 @@ fun adaptiveTextColor(
 
 /**
  * Calculates adaptive colors for topbar content based on the background color.
- * Uses the same logic as Player.kt to ensure consistent behavior across the app.
- * Returns a set of colors optimized for Material Design 3 topbars.
+ * Optimized for both light and dark modes with proper Material Design 3 integration.
  * 
  * @param backgroundColor The topbar background color
  * @return AdaptiveTopBarColors containing all necessary colors for topbar content
@@ -88,39 +87,86 @@ fun adaptiveTopBarColors(backgroundColor: Color): AdaptiveTopBarColors {
     // Get the base adaptive color (White or Black) using Player.kt logic
     val baseTextColor = adaptiveTextColor(backgroundColor)
     
-    // Create Material 3 compatible colors based on the base color
+    // Check if we're in dark mode
+    val isDarkMode = MaterialTheme.colorScheme.surface.luminance() < 0.5f
+    
+    // Create Material 3 compatible colors based on the base color and theme
     val isDarkText = baseTextColor == Color.Black
     
     val titleColor = if (isDarkText) {
-        // For dark text on light background, use Material 3 dark colors
-        MaterialTheme.colorScheme.onSurface
+        // For dark text on light background
+        if (isDarkMode) {
+            // In dark mode, use lighter colors for better contrast
+            MaterialTheme.colorScheme.onSurface.copy(alpha = 0.95f)
+        } else {
+            MaterialTheme.colorScheme.onSurface
+        }
     } else {
-        // For light text on dark background, use white or light colors
-        Color.White
+        // For light text on dark background
+        if (isDarkMode) {
+            // In dark mode, use pure white for better visibility
+            Color.White
+        } else {
+            // In light mode, use slightly dimmed white
+            Color.White.copy(alpha = 0.95f)
+        }
     }
     
     val subtitleColor = if (isDarkText) {
-        // For dark text, use a slightly lighter variant
-        MaterialTheme.colorScheme.onSurfaceVariant
+        // For dark text
+        if (isDarkMode) {
+            // In dark mode, use lighter variant
+            MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.9f)
+        } else {
+            MaterialTheme.colorScheme.onSurfaceVariant
+        }
     } else {
-        // For light text, use a slightly dimmed white
-        Color.White.copy(alpha = 0.8f)
+        // For light text
+        if (isDarkMode) {
+            // In dark mode, use slightly dimmed white
+            Color.White.copy(alpha = 0.85f)
+        } else {
+            // In light mode, use more dimmed white
+            Color.White.copy(alpha = 0.8f)
+        }
     }
     
     val iconColor = if (isDarkText) {
         // For dark icons
-        MaterialTheme.colorScheme.onSurfaceVariant
+        if (isDarkMode) {
+            // In dark mode, use lighter variant
+            MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.9f)
+        } else {
+            MaterialTheme.colorScheme.onSurfaceVariant
+        }
     } else {
         // For light icons
-        Color.White.copy(alpha = 0.9f)
+        if (isDarkMode) {
+            // In dark mode, use pure white
+            Color.White
+        } else {
+            // In light mode, use slightly dimmed white
+            Color.White.copy(alpha = 0.9f)
+        }
     }
     
     val actionColor = if (isDarkText) {
-        // For dark theme, use primary color
-        MaterialTheme.colorScheme.primary
+        // For dark text
+        if (isDarkMode) {
+            // In dark mode, use primary with higher alpha
+            MaterialTheme.colorScheme.primary.copy(alpha = 0.9f)
+        } else {
+            MaterialTheme.colorScheme.primary
+        }
     } else {
-        // For light theme on dark background, use a light accent
-        MaterialTheme.colorScheme.primaryContainer
+        // For light text
+        if (isDarkMode) {
+            // In dark mode, use primary container for better contrast
+            MaterialTheme.colorScheme.primaryContainer
+        } else {
+            // In light mode, use primary
+            MaterialTheme.colorScheme.primary
+        }
     }
     
     return AdaptiveTopBarColors(

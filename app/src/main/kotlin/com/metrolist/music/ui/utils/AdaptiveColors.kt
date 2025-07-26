@@ -112,8 +112,8 @@ fun adaptiveTopBarColors(backgroundColor: Color): AdaptiveTopBarColors {
     val titleColor = if (isDarkText) {
         // For dark text on light background
         if (isDarkMode) {
-            // In dark mode on light background, use white for better visibility
-            Color.White
+            // In dark mode on light background, use black for better visibility
+            Color.Black
         } else {
             MaterialTheme.colorScheme.onSurface
         }
@@ -131,8 +131,8 @@ fun adaptiveTopBarColors(backgroundColor: Color): AdaptiveTopBarColors {
     val subtitleColor = if (isDarkText) {
         // For dark text
         if (isDarkMode) {
-            // In dark mode on light background, use white for better visibility
-            Color.White.copy(alpha = 0.9f)
+            // In dark mode on light background, use black for better visibility
+            Color.Black.copy(alpha = 0.8f)
         } else {
             MaterialTheme.colorScheme.onSurfaceVariant
         }
@@ -150,8 +150,8 @@ fun adaptiveTopBarColors(backgroundColor: Color): AdaptiveTopBarColors {
     val iconColor = if (isDarkText) {
         // For dark icons
         if (isDarkMode) {
-            // In dark mode on light background, use white for better visibility
-            Color.White
+            // In dark mode on light background, use black for better visibility
+            Color.Black
         } else {
             MaterialTheme.colorScheme.onSurfaceVariant
         }
@@ -169,8 +169,8 @@ fun adaptiveTopBarColors(backgroundColor: Color): AdaptiveTopBarColors {
     val actionColor = if (isDarkText) {
         // For dark text
         if (isDarkMode) {
-            // In dark mode, use primary with higher alpha
-            MaterialTheme.colorScheme.primary.copy(alpha = 0.9f)
+            // In dark mode on light background, use primary for better visibility
+            MaterialTheme.colorScheme.primary
         } else {
             MaterialTheme.colorScheme.primary
         }

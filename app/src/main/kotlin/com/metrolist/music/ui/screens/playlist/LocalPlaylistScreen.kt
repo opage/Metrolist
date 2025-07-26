@@ -848,17 +848,14 @@ fun LocalPlaylistScreen(
             }
         }
 
-        val topBarAnimatedColor by animateColorAsState(
-            if (showTopBarTitle || inSelectMode || isSearching) animatedBackgroundColor.copy(alpha = 0.8f) else Color.Transparent,
-            label = "TopBarColor"
-        )
+        val topBarColor = if (showTopBarTitle || inSelectMode || isSearching) animatedBackgroundColor else Color.Transparent
 
         // Calculate adaptive colors based on the background color using Player.kt logic
-        val adaptiveColors = adaptiveTopBarColors(topBarAnimatedColor)
+        val adaptiveColors = adaptiveTopBarColors(topBarColor)
 
         TopAppBar(
-            modifier = Modifier.background(topBarAnimatedColor),
-            colors = TopAppBarDefaults.topAppBarColors(containerColor = topBarAnimatedColor),
+            modifier = Modifier.background(topBarColor),
+            colors = TopAppBarDefaults.topAppBarColors(containerColor = topBarColor),
             title = {
                 if (inSelectMode) {
                     Text(

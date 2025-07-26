@@ -75,15 +75,8 @@ fun ChartsScreen(
 
     Scaffold(
         topBar = {
-            val adaptiveColors = adaptiveTopBarColors(MaterialTheme.colorScheme.surface)
-            
             TopAppBar(
-                title = { 
-                    Text(
-                        text = stringResource(R.string.charts),
-                        color = adaptiveColors.titleColor
-                    ) 
-                },
+                title = { Text(stringResource(R.string.charts)) },
                 navigationIcon = {
                     IconButton(
                         onClick = { navController.navigateUp() },
@@ -92,7 +85,6 @@ fun ChartsScreen(
                         Icon(
                             painter = painterResource(R.drawable.arrow_back),
                             contentDescription = null,
-                            tint = adaptiveColors.iconColor
                         )
                     }
                 },

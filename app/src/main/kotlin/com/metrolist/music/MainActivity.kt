@@ -666,9 +666,9 @@ class MainActivity : ComponentActivity() {
                                         colors = TopAppBarDefaults.topAppBarColors(
                                             containerColor = if (pureBlack) Color.Black else MaterialTheme.colorScheme.surfaceContainer,
                                             scrolledContainerColor = if (pureBlack) Color.Black else MaterialTheme.colorScheme.surfaceContainer,
-                                            titleContentColor = adaptiveTopBarColors(if (pureBlack) Color.Black else MaterialTheme.colorScheme.surfaceContainer).titleColor,
-                                            actionIconContentColor = adaptiveTopBarColors(if (pureBlack) Color.Black else MaterialTheme.colorScheme.surfaceContainer).iconColor,
-                                            navigationIconContentColor = adaptiveTopBarColors(if (pureBlack) Color.Black else MaterialTheme.colorScheme.surfaceContainer).iconColor
+                                            titleContentColor = if (pureBlack) Color.White else MaterialTheme.colorScheme.onSurface,
+                                            actionIconContentColor = if (pureBlack) Color.White else MaterialTheme.colorScheme.onSurfaceVariant,
+                                            navigationIconContentColor = if (pureBlack) Color.White else MaterialTheme.colorScheme.onSurfaceVariant
                                         )
                                     )
                                 }

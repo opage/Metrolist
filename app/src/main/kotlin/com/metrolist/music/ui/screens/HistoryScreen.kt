@@ -386,15 +386,12 @@ fun HistoryScreen(
         )
     }
 
-    val adaptiveColors = adaptiveTopBarColors(MaterialTheme.colorScheme.surface)
-    
     TopAppBar(
         title = {
             if (inSelectMode) {
                 Text(
                     text = pluralStringResource(R.plurals.n_selected, selection.size, selection.size),
-                    style = MaterialTheme.typography.titleLarge,
-                    color = adaptiveColors.titleColor
+                    style = MaterialTheme.typography.titleLarge
                 )
             } else if (isSearching) {
                 TextField(
@@ -403,12 +400,11 @@ fun HistoryScreen(
                     placeholder = {
                         Text(
                             text = stringResource(R.string.search),
-                            style = MaterialTheme.typography.titleLarge,
-                            color = adaptiveColors.subtitleColor
+                            style = MaterialTheme.typography.titleLarge
                         )
                     },
                     singleLine = true,
-                    textStyle = MaterialTheme.typography.titleLarge.copy(color = adaptiveColors.titleColor),
+                    textStyle = MaterialTheme.typography.titleLarge,
                     keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
                     colors = TextFieldDefaults.colors(
                         focusedContainerColor = Color.Transparent,
@@ -416,19 +412,13 @@ fun HistoryScreen(
                         focusedIndicatorColor = Color.Transparent,
                         unfocusedIndicatorColor = Color.Transparent,
                         disabledIndicatorColor = Color.Transparent,
-                        focusedTextColor = adaptiveColors.titleColor,
-                        unfocusedTextColor = adaptiveColors.titleColor,
-                        cursorColor = adaptiveColors.actionColor
                     ),
                     modifier = Modifier
                         .fillMaxWidth()
                         .focusRequester(focusRequester)
                 )
             } else {
-                Text(
-                    text = stringResource(R.string.history),
-                    color = adaptiveColors.titleColor
-                )
+                Text(stringResource(R.string.history))
             }
         },
         navigationIcon = {
@@ -459,8 +449,7 @@ fun HistoryScreen(
                     painter = painterResource(
                         if (inSelectMode || isSearching) R.drawable.close else R.drawable.arrow_back
                     ),
-                    contentDescription = null,
-                    tint = adaptiveColors.iconColor
+                    contentDescription = null
                 )
             }
         },
@@ -494,8 +483,7 @@ fun HistoryScreen(
                 ) {
                     Icon(
                         painter = painterResource(R.drawable.more_vert),
-                        contentDescription = null,
-                        tint = adaptiveColors.iconColor
+                        contentDescription = null
                     )
                 }
             } else if (!isSearching) {
@@ -504,8 +492,7 @@ fun HistoryScreen(
                 ) {
                     Icon(
                         painter = painterResource(R.drawable.search),
-                        contentDescription = null,
-                        tint = adaptiveColors.iconColor
+                        contentDescription = null
                     )
                 }
             }

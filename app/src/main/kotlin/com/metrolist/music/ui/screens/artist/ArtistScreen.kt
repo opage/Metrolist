@@ -714,19 +714,8 @@ fun ArtistScreen(
         )
     }
 
-    val adaptiveColors = adaptiveTopBarColors(
-        if (transparentAppBar) Color.Transparent else MaterialTheme.colorScheme.surface
-    )
-    
     TopAppBar(
-        title = { 
-            if (!transparentAppBar) {
-                Text(
-                    text = artistPage?.artist?.title.orEmpty(),
-                    color = adaptiveColors.titleColor
-                )
-            }
-        },
+        title = { if (!transparentAppBar) Text(artistPage?.artist?.title.orEmpty()) },
         navigationIcon = {
             IconButton(
                 onClick = navController::navigateUp,
@@ -735,7 +724,6 @@ fun ArtistScreen(
                 Icon(
                     painterResource(R.drawable.arrow_back),
                     contentDescription = null,
-                    tint = adaptiveColors.iconColor
                 )
             }
         },
@@ -753,7 +741,6 @@ fun ArtistScreen(
                 Icon(
                     painterResource(R.drawable.link),
                     contentDescription = null,
-                    tint = adaptiveColors.iconColor
                 )
             }
         },

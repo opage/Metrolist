@@ -77,6 +77,7 @@ import com.metrolist.music.ui.menu.SelectionMediaMetadataMenu
 import com.metrolist.music.ui.menu.SongMenu
 import com.metrolist.music.ui.menu.YouTubeSongMenu
 import com.metrolist.music.ui.utils.backToMain
+import com.metrolist.music.ui.utils.adaptiveTopBarColors
 import com.metrolist.music.utils.rememberPreference
 import com.metrolist.music.viewmodels.DateAgo
 import com.metrolist.music.viewmodels.HistoryViewModel
@@ -385,12 +386,15 @@ fun HistoryScreen(
         )
     }
 
+    val adaptiveColors = adaptiveTopBarColors(MaterialTheme.colorScheme.surface)
+    
     TopAppBar(
         title = {
             if (inSelectMode) {
                 Text(
                     text = pluralStringResource(R.plurals.n_selected, selection.size, selection.size),
-                    style = MaterialTheme.typography.titleLarge
+                    style = MaterialTheme.typography.titleLarge,
+                    color = adaptiveColors.titleColor
                 )
             } else if (isSearching) {
                 TextField(
@@ -399,11 +403,12 @@ fun HistoryScreen(
                     placeholder = {
                         Text(
                             text = stringResource(R.string.search),
-                            style = MaterialTheme.typography.titleLarge
+                            style = MaterialTheme.typography.titleLarge,
+                            color = adaptiveColors.subtitleColor
                         )
                     },
                     singleLine = true,
-                    textStyle = MaterialTheme.typography.titleLarge,
+                    textStyle = MaterialTheme.typography.titleLarge.copy(color = adaptiveColors.titleColor),
                     keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
                     colors = TextFieldDefaults.colors(
                         focusedContainerColor = Color.Transparent,
@@ -411,13 +416,19 @@ fun HistoryScreen(
                         focusedIndicatorColor = Color.Transparent,
                         unfocusedIndicatorColor = Color.Transparent,
                         disabledIndicatorColor = Color.Transparent,
+                        focusedTextColor = adaptiveColors.titleColor,
+                        unfocusedTextColor = adaptiveColors.titleColor,
+                        cursorColor = adaptiveColors.actionColor
                     ),
                     modifier = Modifier
                         .fillMaxWidth()
                         .focusRequester(focusRequester)
                 )
             } else {
-                Text(stringResource(R.string.history))
+                Text(
+                    text = stringResource(R.string.history),
+                    color = adaptiveColors.titleColor
+                )
             }
         },
         navigationIcon = {
@@ -448,7 +459,8 @@ fun HistoryScreen(
                     painter = painterResource(
                         if (inSelectMode || isSearching) R.drawable.close else R.drawable.arrow_back
                     ),
-                    contentDescription = null
+                    contentDescription = null,
+                    tint = adaptiveColors.iconColor
                 )
             }
         },
@@ -482,7 +494,8 @@ fun HistoryScreen(
                 ) {
                     Icon(
                         painter = painterResource(R.drawable.more_vert),
-                        contentDescription = null
+                        contentDescription = null,
+                        tint = adaptiveColors.iconColor
                     )
                 }
             } else if (!isSearching) {
@@ -491,7 +504,8 @@ fun HistoryScreen(
                 ) {
                     Icon(
                         painter = painterResource(R.drawable.search),
-                        contentDescription = null
+                        contentDescription = null,
+                        tint = adaptiveColors.iconColor
                     )
                 }
             }

@@ -43,6 +43,7 @@ import com.metrolist.music.ui.component.YouTubeListItem
 import com.metrolist.music.ui.component.shimmer.GridItemPlaceHolder
 import com.metrolist.music.ui.component.shimmer.ShimmerHost
 import com.metrolist.music.ui.component.shimmer.TextPlaceholder
+import com.metrolist.music.ui.utils.adaptiveTopBarColors
 import com.metrolist.music.ui.menu.YouTubeSongMenu
 import com.metrolist.music.ui.utils.backToMain
 import com.metrolist.music.ui.utils.SnapLayoutInfoProvider
@@ -74,8 +75,15 @@ fun ChartsScreen(
 
     Scaffold(
         topBar = {
+            val adaptiveColors = adaptiveTopBarColors(MaterialTheme.colorScheme.surface)
+            
             TopAppBar(
-                title = { Text(stringResource(R.string.charts)) },
+                title = { 
+                    Text(
+                        text = stringResource(R.string.charts),
+                        color = adaptiveColors.titleColor
+                    ) 
+                },
                 navigationIcon = {
                     IconButton(
                         onClick = { navController.navigateUp() },
@@ -84,6 +92,7 @@ fun ChartsScreen(
                         Icon(
                             painter = painterResource(R.drawable.arrow_back),
                             contentDescription = null,
+                            tint = adaptiveColors.iconColor
                         )
                     }
                 },

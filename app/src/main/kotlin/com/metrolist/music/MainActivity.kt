@@ -98,6 +98,7 @@ import androidx.compose.ui.util.fastForEach
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.core.net.toUri
+import com.metrolist.music.ui.utils.adaptiveTopBarColors
 import androidx.core.util.Consumer
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
@@ -665,9 +666,9 @@ class MainActivity : ComponentActivity() {
                                         colors = TopAppBarDefaults.topAppBarColors(
                                             containerColor = if (pureBlack) Color.Black else MaterialTheme.colorScheme.surfaceContainer,
                                             scrolledContainerColor = if (pureBlack) Color.Black else MaterialTheme.colorScheme.surfaceContainer,
-                                            titleContentColor = if (pureBlack) Color.White else MaterialTheme.colorScheme.onSurface,
-                                            actionIconContentColor = if (pureBlack) Color.White else MaterialTheme.colorScheme.onSurfaceVariant,
-                                            navigationIconContentColor = if (pureBlack) Color.White else MaterialTheme.colorScheme.onSurfaceVariant
+                                            titleContentColor = adaptiveTopBarColors(if (pureBlack) Color.Black else MaterialTheme.colorScheme.surfaceContainer).titleColor,
+                                            actionIconContentColor = adaptiveTopBarColors(if (pureBlack) Color.Black else MaterialTheme.colorScheme.surfaceContainer).iconColor,
+                                            navigationIconContentColor = adaptiveTopBarColors(if (pureBlack) Color.Black else MaterialTheme.colorScheme.surfaceContainer).iconColor
                                         )
                                     )
                                 }

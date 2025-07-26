@@ -98,6 +98,7 @@ import com.metrolist.music.ui.component.HideOnScrollFAB
 import com.metrolist.music.ui.component.IconButton
 import com.metrolist.music.ui.component.LocalMenuState
 import com.metrolist.music.ui.component.NavigationTitle
+import com.metrolist.music.ui.utils.adaptiveTopBarColors
 import com.metrolist.music.ui.component.SongListItem
 import com.metrolist.music.ui.component.YouTubeGridItem
 import com.metrolist.music.ui.component.YouTubeListItem
@@ -713,8 +714,19 @@ fun ArtistScreen(
         )
     }
 
+    val adaptiveColors = adaptiveTopBarColors(
+        if (transparentAppBar) Color.Transparent else MaterialTheme.colorScheme.surface
+    )
+    
     TopAppBar(
-        title = { if (!transparentAppBar) Text(artistPage?.artist?.title.orEmpty()) },
+        title = { 
+            if (!transparentAppBar) {
+                Text(
+                    text = artistPage?.artist?.title.orEmpty(),
+                    color = adaptiveColors.titleColor
+                )
+            }
+        },
         navigationIcon = {
             IconButton(
                 onClick = navController::navigateUp,
@@ -723,6 +735,7 @@ fun ArtistScreen(
                 Icon(
                     painterResource(R.drawable.arrow_back),
                     contentDescription = null,
+                    tint = adaptiveColors.iconColor
                 )
             }
         },
@@ -740,6 +753,7 @@ fun ArtistScreen(
                 Icon(
                     painterResource(R.drawable.link),
                     contentDescription = null,
+                    tint = adaptiveColors.iconColor
                 )
             }
         },

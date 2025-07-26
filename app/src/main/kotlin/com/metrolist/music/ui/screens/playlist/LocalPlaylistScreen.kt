@@ -848,7 +848,12 @@ fun LocalPlaylistScreen(
             }
         }
 
-        val topBarColor = if (showTopBarTitle || inSelectMode || isSearching) animatedBackgroundColor else Color.Transparent
+        val topBarColor = if (showTopBarTitle || inSelectMode || isSearching) {
+            // Use high opacity for better contrast and readability
+            animatedBackgroundColor.copy(alpha = 0.95f)
+        } else {
+            Color.Transparent
+        }
 
         // Calculate adaptive colors based on the background color using Player.kt logic
         val adaptiveColors = adaptiveTopBarColors(topBarColor)

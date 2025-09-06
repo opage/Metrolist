@@ -104,10 +104,13 @@ jobs:
           PROTO_DIR=external/PipePipeExtractor/extractor/src/main/proto
           OUT_DIR=external/PipePipeExtractor/extractor/build/generated/wire
           mkdir -p "$OUT_DIR"
+          cd "$PROTO_DIR"
+          PROTOS=$(ls *.proto | tr '\n' ' ')
+          cd -
           cs launch com.squareup.wire:wire-compiler:5.1.0 -M com.squareup.wire.WireCompiler -- \
             --proto_path="$PROTO_DIR" \
             --java_out="$OUT_DIR" \
-            $(find "$PROTO_DIR" -name '*.proto' -print)
+            $PROTOS
       - name: Patch PipePipeExtractor for Gradle 8.13 (disable plugin)
         run: |
           sed -i "/id 'com.squareup.wire'/d" external/PipePipeExtractor/extractor/build.gradle
@@ -120,10 +123,13 @@ jobs:
           PROTO_DIR=external/PipePipeExtractor/extractor/src/main/proto
           OUT_DIR=external/PipePipeExtractor/extractor/build/generated/wire
           mkdir -p "$OUT_DIR"
+          cd "$PROTO_DIR"
+          PROTOS=$(ls *.proto | tr '\n' ' ')
+          cd -
           cs launch com.squareup.wire:wire-compiler:5.1.0 -M com.squareup.wire.WireCompiler -- \
             --proto_path="$PROTO_DIR" \
             --java_out="$OUT_DIR" \
-            $(find "$PROTO_DIR" -name '*.proto' -print)
+            $PROTOS
 
       - name: Set up JDK 21
         uses: actions/setup-java@v5

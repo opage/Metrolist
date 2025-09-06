@@ -92,6 +92,12 @@ jobs:
           mkdir -p external
           rm -rf external/PipePipeExtractor || true
           git clone --depth 1 https://github.com/InfinityLoop1308/PipePipeExtractor external/PipePipeExtractor
+      - name: Patch PipePipeExtractor for Gradle 8.13
+        run: |
+          sed -i "s/id 'com.squareup.wire' version '[^']*'/id 'com.squareup.wire' version '5.1.0'/" external/PipePipeExtractor/extractor/build.gradle
+      - name: Patch PipePipeExtractor for Gradle 8.13
+        run: |
+          sed -i "s/id 'com.squareup.wire' version '[^']*'/id 'com.squareup.wire' version '5.1.0'/" external/PipePipeExtractor/extractor/build.gradle
 
       - name: Set up JDK 21
         uses: actions/setup-java@v5

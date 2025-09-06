@@ -38,16 +38,17 @@ include(":kizzy")
 //    }
 //}
 
-// Use a local copy of PipePipeExtractor (latest) via composite build when a valid Gradle build is present
+// Require local PipePipeExtractor (latest) via composite build
 val localPipePipe = file("external/PipePipeExtractor")
 val localPipePipeHasSettings =
     localPipePipe.resolve("settings.gradle").exists() || localPipePipe.resolve("settings.gradle.kts").exists()
-if (localPipePipe.exists() && localPipePipeHasSettings) {
-    includeBuild("external/PipePipeExtractor") {
-        dependencySubstitution {
-            substitute(module("com.github.InfinityLoop1308:PipePipeExtractor")).using(project(":"))
-            substitute(module("com.github.InfinityLoop1308.PipePipeExtractor:extractor")).using(project(":extractor"))
-            substitute(module("com.github.InfinityLoop1308.PipePipeExtractor:timeago-parser")).using(project(":timeago-parser"))
-        }
+check(localPipePipe.exists() && localPipePipeHasSettings) {
+    "PipePipeExtractor not found. Initialize submodule or clone to external/PipePipeExtractor before building."
+}
+includeBuild("external/PipePipeExtractor") {
+    dependencySubstitution {
+        substitute(module("com.github.InfinityLoop1308:PipePipeExtractor")).using(project(":"))
+        substitute(module("com.github.InfinityLoop1308.PipePipeExtractor:extractor")).using(project(":extractor"))
+        substitute(module("com.github.InfinityLoop1308.PipePipeExtractor:timeago-parser")).using(project(":timeago-parser"))
     }
 }

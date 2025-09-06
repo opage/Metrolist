@@ -33,9 +33,9 @@ jobs:
       - name: Fetch PipePipeExtractor (composite)
         run: |
           mkdir -p external
-          if [ ! -d external/PipePipeExtractor ]; then
-            git clone https://github.com/InfinityLoop1308/PipePipeExtractor external/PipePipeExtractor
-          fi
+          # Remove leftover gitlink or empty dir from accidental submodule
+          rm -rf external/PipePipeExtractor || true
+          git clone --depth 1 https://github.com/InfinityLoop1308/PipePipeExtractor external/PipePipeExtractor
       
       - name: Set up JDK 21
         uses: actions/setup-java@v5
@@ -90,9 +90,8 @@ jobs:
       - name: Fetch PipePipeExtractor (composite)
         run: |
           mkdir -p external
-          if [ ! -d external/PipePipeExtractor ]; then
-            git clone https://github.com/InfinityLoop1308/PipePipeExtractor external/PipePipeExtractor
-          fi
+          rm -rf external/PipePipeExtractor || true
+          git clone --depth 1 https://github.com/InfinityLoop1308/PipePipeExtractor external/PipePipeExtractor
 
       - name: Set up JDK 21
         uses: actions/setup-java@v5

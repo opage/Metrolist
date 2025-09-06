@@ -37,3 +37,15 @@ include(":kizzy")
 //        substitute(module("com.github.teamnewpipe:NewPipeExtractor")).using(project(":extractor"))
 //    }
 //}
+
+// Use a local copy of PipePipeExtractor (latest) via composite build when available
+val localPipePipe = file("external/PipePipeExtractor")
+if (localPipePipe.exists()) {
+    includeBuild("external/PipePipeExtractor") {
+        dependencySubstitution {
+            substitute(module("com.github.InfinityLoop1308:PipePipeExtractor")).using(project(":"))
+            substitute(module("com.github.InfinityLoop1308.PipePipeExtractor:extractor")).using(project(":extractor"))
+            substitute(module("com.github.InfinityLoop1308.PipePipeExtractor:timeago-parser")).using(project(":timeago-parser"))
+        }
+    }
+}

@@ -36,6 +36,26 @@ jobs:
           # Remove leftover gitlink or empty dir from accidental submodule
           rm -rf external/PipePipeExtractor || true
           git clone --depth 1 https://github.com/InfinityLoop1308/PipePipeExtractor external/PipePipeExtractor
+      - name: Patch PipePipeExtractor for Gradle 8.13 (disable plugin)
+        run: |
+          sed -i "/id 'com.squareup.wire'/d" external/PipePipeExtractor/extractor/build.gradle
+          sed -i '/^wire\s*{/,/^}/d' external/PipePipeExtractor/extractor/build.gradle
+          printf "\nsourceSets {\n  main {\n    java { srcDirs('build/generated/wire') }\n  }\n}\n" >> external/PipePipeExtractor/extractor/build.gradle
+          printf "\ndependencies {\n  implementation 'com.squareup.wire:wire-runtime:5.1.0'\n}\n" >> external/PipePipeExtractor/extractor/build.gradle
+      - name: Install Coursier (cs)
+        uses: coursier/setup-action@v1
+      - name: Generate Wire Java sources via CLI
+        run: |
+          PROTO_DIR=external/PipePipeExtractor/extractor/src/main/proto
+          OUT_DIR=external/PipePipeExtractor/extractor/build/generated/wire
+          mkdir -p "$OUT_DIR"
+          cd "$PROTO_DIR"
+          PROTOS=$(ls *.proto | tr '\n' ' ')
+          cd -
+          cs launch com.squareup.wire:wire-compiler:5.1.0 -M com.squareup.wire.WireCompiler -- \
+            --proto_path="$PROTO_DIR" \
+            --java_out="$OUT_DIR" \
+            $PROTOS
       
       - name: Set up JDK 21
         uses: actions/setup-java@v5

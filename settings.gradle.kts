@@ -38,9 +38,11 @@ include(":kizzy")
 //    }
 //}
 
-// Use a local copy of PipePipeExtractor (latest) via composite build when available
+// Use a local copy of PipePipeExtractor (latest) via composite build when a valid Gradle build is present
 val localPipePipe = file("external/PipePipeExtractor")
-if (localPipePipe.exists()) {
+val localPipePipeHasSettings =
+    localPipePipe.resolve("settings.gradle").exists() || localPipePipe.resolve("settings.gradle.kts").exists()
+if (localPipePipe.exists() && localPipePipeHasSettings) {
     includeBuild("external/PipePipeExtractor") {
         dependencySubstitution {
             substitute(module("com.github.InfinityLoop1308:PipePipeExtractor")).using(project(":"))

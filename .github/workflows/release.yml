@@ -73,14 +73,13 @@ jobs:
           sed -i "/id 'com.squareup.wire'/d" external/PipePipeExtractor/extractor/build.gradle
           sed -i '/^wire\s*{/,/^}/d' external/PipePipeExtractor/extractor/build.gradle
           printf "\nsourceSets {\n  main {\n    java { srcDirs('build/generated/wire') }\n  }\n}\n" >> external/PipePipeExtractor/extractor/build.gradle
-      - name: Install Coursier (cs)
-        uses: coursier/setup-action@v1
       - name: Generate Wire Java sources via CLI
         run: |
           PROTO_DIR=external/PipePipeExtractor/extractor/src/main/proto
           OUT_DIR=external/PipePipeExtractor/extractor/build/generated/wire
           mkdir -p "$OUT_DIR"
-          cs launch com.squareup.wire:wire-compiler:5.1.0 -- \
+          curl -L -o /tmp/wire-compiler.jar https://repo1.maven.org/maven2/com/squareup/wire/wire-compiler/5.1.0/wire-compiler-5.1.0.jar
+          java -cp /tmp/wire-compiler.jar com.squareup.wire.WireCompiler \
             --proto_path="$PROTO_DIR" \
             --java_out="$OUT_DIR" \
             $(find "$PROTO_DIR" -name '*.proto' -print)

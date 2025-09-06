@@ -24,6 +24,7 @@ jobs:
           sed -i "/id 'com.squareup.wire'/d" external/PipePipeExtractor/extractor/build.gradle
           sed -i '/^wire\s*{/,/^}/d' external/PipePipeExtractor/extractor/build.gradle
           printf "\nsourceSets {\n  main {\n    java { srcDirs('build/generated/wire') }\n  }\n}\n" >> external/PipePipeExtractor/extractor/build.gradle
+          printf "\ndependencies {\n  implementation 'com.squareup.wire:wire-runtime:5.1.0'\n}\n" >> external/PipePipeExtractor/extractor/build.gradle
       - name: Install Coursier (cs)
         uses: coursier/setup-action@v1
       - name: Generate Wire Java sources via CLI

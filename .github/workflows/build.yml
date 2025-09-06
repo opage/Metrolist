@@ -94,7 +94,19 @@ jobs:
           git clone --depth 1 https://github.com/InfinityLoop1308/PipePipeExtractor external/PipePipeExtractor
       - name: Patch PipePipeExtractor for Gradle 8.13
         run: |
-          sed -i "s/id 'com.squareup.wire' version '[^']*'/id 'com.squareup.wire' version '5.1.0'/" external/PipePipeExtractor/extractor/build.gradle
+          # Disable Wire Gradle plugin and remove its block (we'll run CLI to generate sources)
+          sed -i "/id 'com.squareup.wire'/d" external/PipePipeExtractor/extractor/build.gradle
+          sed -i '/^wire\s*{/,/^}/d' external/PipePipeExtractor/extractor/build.gradle
+          # Add generated sources dir to sourceSets
+          printf "\nsourceSets {\n  main {\n    java { srcDirs('build/generated/wire') }\n  }\n}\n" >> external/PipePipeExtractor/extractor/build.gradle
+          # Fetch Wire compiler and generate Java from protos
+          curl -L -o /tmp/wire-compiler.jar https://repo1.maven.org/maven2/com/squareup/wire/wire-compiler/5.1.0/wire-compiler-5.1.0.jar
+          mkdir -p external/PipePipeExtractor/extractor/build/generated/wire
+          PROTO_DIR=external/PipePipeExtractor/extractor/src/main/proto
+          java -jar /tmp/wire-compiler.jar \
+            --proto_path="$PROTO_DIR" \
+            --java_out=external/PipePipeExtractor/extractor/build/generated/wire \
+            $(find "$PROTO_DIR" -name '*.proto' -print)
       - name: Patch PipePipeExtractor for Gradle 8.13
         run: |
           sed -i "s/id 'com.squareup.wire' version '[^']*'/id 'com.squareup.wire' version '5.1.0'/" external/PipePipeExtractor/extractor/build.gradle

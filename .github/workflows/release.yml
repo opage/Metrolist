@@ -70,7 +70,16 @@ jobs:
           git clone --depth 1 https://github.com/InfinityLoop1308/PipePipeExtractor external/PipePipeExtractor
       - name: Patch PipePipeExtractor for Gradle 8.13
         run: |
-          sed -i "s/id 'com.squareup.wire' version '[^']*'/id 'com.squareup.wire' version '5.1.0'/" external/PipePipeExtractor/extractor/build.gradle
+          sed -i "/id 'com.squareup.wire'/d" external/PipePipeExtractor/extractor/build.gradle
+          sed -i '/^wire\s*{/,/^}/d' external/PipePipeExtractor/extractor/build.gradle
+          printf "\nsourceSets {\n  main {\n    java { srcDirs('build/generated/wire') }\n  }\n}\n" >> external/PipePipeExtractor/extractor/build.gradle
+          curl -L -o /tmp/wire-compiler.jar https://repo1.maven.org/maven2/com/squareup/wire/wire-compiler/5.1.0/wire-compiler-5.1.0.jar
+          mkdir -p external/PipePipeExtractor/extractor/build/generated/wire
+          PROTO_DIR=external/PipePipeExtractor/extractor/src/main/proto
+          java -jar /tmp/wire-compiler.jar \
+            --proto_path="$PROTO_DIR" \
+            --java_out=external/PipePipeExtractor/extractor/build/generated/wire \
+            $(find "$PROTO_DIR" -name '*.proto' -print)
 
       - name: Set up JDK 21
         uses: actions/setup-java@v5

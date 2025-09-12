@@ -66,6 +66,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
@@ -126,6 +127,7 @@ import com.metrolist.music.ui.screens.search.LocalSearchScreen
 import com.metrolist.music.ui.screens.search.OnlineSearchScreen
 import com.metrolist.music.ui.screens.settings.NavigationTab
 import com.metrolist.music.ui.utils.appBarScrollBehavior
+import com.metrolist.music.ui.utils.backToMain
 import com.metrolist.music.ui.utils.resetHeightOffset
 import com.metrolist.music.utils.SyncUtils
 import com.metrolist.music.utils.dataStore
@@ -150,8 +152,11 @@ fun MainScreen(
     latestVersionName: String,
     onNewIntentListener: (Consumer<Intent>) -> Unit,
     onRemoveNewIntentListener: (Consumer<Intent>) -> Unit,
-    onHandleDeepLink: (Intent, NavHostController) -> Unit
+    onHandleDeepLink: (Intent, NavHostController) -> Unit,
+    initialIntent: Intent? = null,
+    pendingIntent: Intent? = null
 ) {
+    val context = LocalContext.current
     val focusManager = LocalFocusManager.current
     val density = LocalDensity.current
     val windowsInsets = WindowInsets.systemBars
@@ -169,7 +174,7 @@ fun MainScreen(
     val (useNewMiniPlayerDesign) = rememberPreference(UseNewMiniPlayerDesignKey, defaultValue = true)
     val defaultOpenTab =
         remember {
-            dataStore[DefaultOpenTabKey].toEnum(defaultValue = NavigationTab.HOME)
+            context.dataStore[DefaultOpenTabKey].toEnum(defaultValue = NavigationTab.HOME)
         }
 
     val topLevelScreens =
@@ -207,7 +212,7 @@ fun MainScreen(
         if (it.isNotEmpty()) {
             onActiveChange(false)
             navController.navigate("search/${URLEncoder.encode(it, "UTF-8")}")
-            if (dataStore[PauseSearchHistoryKey] != true) {
+            if (context.dataStore[PauseSearchHistoryKey] != true) {
                 database.query {
                     insert(SearchHistory(query = it))
                 }
@@ -216,7 +221,7 @@ fun MainScreen(
     }
 
     var openSearchImmediately: Boolean by remember {
-        mutableStateOf(false)
+        mutableStateOf(initialIntent?.action == com.metrolist.music.MainActivity.ACTION_SEARCH)
     }
 
     val shouldShowSearchBar =
@@ -378,6 +383,14 @@ fun MainScreen(
         mutableStateOf(null)
     }
 
+    LaunchedEffect(Unit) {
+        if (pendingIntent != null) {
+            onHandleDeepLink(pendingIntent, navController)
+        } else if (initialIntent != null) {
+            onHandleDeepLink(initialIntent, navController)
+        }
+    }
+
     DisposableEffect(Unit) {
         val listener = Consumer<Intent> { intent ->
             onHandleDeepLink(intent, navController)
@@ -512,7 +525,7 @@ fun MainScreen(
                                         when {
                                             active -> {}
                                             !navigationItems.fastAny { it.route == navBackStackEntry?.destination?.route } -> {
-                                                com.metrolist.music.ui.utils.backToMain(navController)
+                                                navController.backToMain()
                                             }
                                             else -> {}
                                         }
@@ -627,7 +640,7 @@ fun MainScreen(
                                                         )
                                                     }"
                                                 )
-                                                if (dataStore[PauseSearchHistoryKey] != true) {
+                                                if (context.dataStore[PauseSearchHistoryKey] != true) {
                                                     database.query {
                                                         insert(SearchHistory(query = it))
                                                     }

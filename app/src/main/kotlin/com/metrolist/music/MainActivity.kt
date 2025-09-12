@@ -262,12 +262,11 @@ class MainActivity : ComponentActivity() {
                             }
                         }
 
-                    LaunchedEffect(Unit) {
-                        if (pendingIntent != null) {
-                            handleDeepLinkIntent(pendingIntent!!, rememberNavController())
+                    val currentPendingIntent = pendingIntent
+                    
+                    LaunchedEffect(currentPendingIntent) {
+                        if (currentPendingIntent != null) {
                             pendingIntent = null
-                        } else {
-                            handleDeepLinkIntent(intent, rememberNavController())
                         }
                     }
 
@@ -280,7 +279,9 @@ class MainActivity : ComponentActivity() {
                         latestVersionName = latestVersionName,
                         onNewIntentListener = ::addOnNewIntentListener,
                         onRemoveNewIntentListener = ::removeOnNewIntentListener,
-                        onHandleDeepLink = ::handleDeepLinkIntent
+                        onHandleDeepLink = ::handleDeepLinkIntent,
+                        initialIntent = intent,
+                        pendingIntent = currentPendingIntent
                     )
                 }
             }

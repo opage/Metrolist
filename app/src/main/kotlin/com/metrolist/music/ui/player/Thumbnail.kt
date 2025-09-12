@@ -67,7 +67,7 @@ import androidx.media3.common.C
 import androidx.media3.common.Player
 import coil3.compose.AsyncImage
 import androidx.compose.material3.Icon
-import com.metrolist.music.LocalPlayerConnection
+import com.metrolist.music.ui.screens.LocalPlayerConnection
 import com.metrolist.music.R
 import com.metrolist.music.constants.PlayerBackgroundStyle
 import com.metrolist.music.constants.PlayerBackgroundStyleKey

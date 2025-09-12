@@ -89,9 +89,9 @@ import com.metrolist.innertube.models.AlbumItem
 import com.metrolist.innertube.models.ArtistItem
 import com.metrolist.innertube.models.PlaylistItem
 import com.metrolist.innertube.models.YTItem
-import com.metrolist.music.LocalDatabase
-import com.metrolist.music.LocalDownloadUtil
-import com.metrolist.music.LocalPlayerConnection
+import com.metrolist.music.ui.screens.LocalDatabase
+import com.metrolist.music.ui.screens.LocalDownloadUtil
+import com.metrolist.music.ui.screens.LocalPlayerConnection
 import com.metrolist.music.R
 import com.metrolist.music.constants.HideExplicitKey
 import com.metrolist.music.constants.ListItemHeight

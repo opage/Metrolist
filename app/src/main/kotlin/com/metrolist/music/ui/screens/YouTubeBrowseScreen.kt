@@ -47,8 +47,8 @@ import com.metrolist.innertube.models.AlbumItem
 import com.metrolist.innertube.models.ArtistItem
 import com.metrolist.innertube.models.PlaylistItem
 import com.metrolist.innertube.models.SongItem
-import com.metrolist.music.LocalPlayerAwareWindowInsets
-import com.metrolist.music.LocalPlayerConnection
+import com.metrolist.music.ui.screens.LocalPlayerAwareWindowInsets
+import com.metrolist.music.ui.screens.LocalPlayerConnection
 import com.metrolist.music.R
 import com.metrolist.music.constants.ListItemHeight
 import com.metrolist.music.extensions.togglePlayPause

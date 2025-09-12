@@ -51,8 +51,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.room.util.copy
-import com.metrolist.music.LocalDatabase
-import com.metrolist.music.LocalPlayerConnection
+import com.metrolist.music.ui.screens.LocalDatabase
+import com.metrolist.music.ui.screens.LocalPlayerConnection
 import com.metrolist.music.R
 import com.metrolist.music.db.entities.LyricsEntity
 import com.metrolist.music.db.entities.SongEntity

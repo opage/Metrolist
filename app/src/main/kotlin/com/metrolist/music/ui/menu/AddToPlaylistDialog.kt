@@ -24,7 +24,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import com.metrolist.innertube.utils.parseCookieString
-import com.metrolist.music.LocalDatabase
+import com.metrolist.music.ui.screens.LocalDatabase
 import com.metrolist.music.R
 import com.metrolist.music.constants.InnerTubeCookieKey
 import com.metrolist.music.constants.ListThumbnailSize

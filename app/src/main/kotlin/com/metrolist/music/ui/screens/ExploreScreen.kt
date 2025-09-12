@@ -33,8 +33,8 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.metrolist.innertube.models.*
-import com.metrolist.music.LocalPlayerAwareWindowInsets
-import com.metrolist.music.LocalPlayerConnection
+import com.metrolist.music.ui.screens.LocalPlayerAwareWindowInsets
+import com.metrolist.music.ui.screens.LocalPlayerConnection
 import com.metrolist.music.R
 import com.metrolist.music.constants.ListItemHeight
 import com.metrolist.music.extensions.togglePlayPause

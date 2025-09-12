@@ -36,10 +36,10 @@ import androidx.media3.exoplayer.offline.Download
 import androidx.media3.exoplayer.offline.DownloadRequest
 import androidx.media3.exoplayer.offline.DownloadService
 import com.metrolist.innertube.YouTube
-import com.metrolist.music.LocalDatabase
-import com.metrolist.music.LocalDownloadUtil
-import com.metrolist.music.LocalPlayerConnection
-import com.metrolist.music.LocalSyncUtils
+import com.metrolist.music.ui.screens.LocalDatabase
+import com.metrolist.music.ui.screens.LocalDownloadUtil
+import com.metrolist.music.ui.screens.LocalPlayerConnection
+import com.metrolist.music.ui.screens.LocalSyncUtils
 import com.metrolist.music.R
 import com.metrolist.music.db.entities.PlaylistSongMap
 import com.metrolist.music.db.entities.Song

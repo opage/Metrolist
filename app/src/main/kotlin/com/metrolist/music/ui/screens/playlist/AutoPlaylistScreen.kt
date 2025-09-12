@@ -74,9 +74,9 @@ import androidx.media3.exoplayer.offline.DownloadRequest
 import androidx.media3.exoplayer.offline.DownloadService
 import androidx.navigation.NavController
 import coil3.compose.AsyncImage
-import com.metrolist.music.LocalDownloadUtil
-import com.metrolist.music.LocalPlayerAwareWindowInsets
-import com.metrolist.music.LocalPlayerConnection
+import com.metrolist.music.ui.screens.LocalDownloadUtil
+import com.metrolist.music.ui.screens.LocalPlayerAwareWindowInsets
+import com.metrolist.music.ui.screens.LocalPlayerConnection
 import com.metrolist.music.R
 import com.metrolist.music.constants.AlbumThumbnailSize
 import com.metrolist.music.constants.HideExplicitKey

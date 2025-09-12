@@ -81,8 +81,8 @@ import coil3.request.ImageRequest
 import coil3.request.allowHardware
 import coil3.size.Size
 import coil3.toBitmap
-import com.metrolist.music.LocalDatabase
-import com.metrolist.music.LocalPlayerConnection
+import com.metrolist.music.ui.screens.LocalDatabase
+import com.metrolist.music.ui.screens.LocalPlayerConnection
 import com.metrolist.music.R
 import com.metrolist.music.constants.PlayerBackgroundStyle
 import com.metrolist.music.constants.PlayerBackgroundStyleKey

@@ -35,7 +35,7 @@ import androidx.datastore.preferences.core.floatPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.navigation.NavController
 import com.metrolist.innertube.YouTube
-import com.metrolist.music.LocalPlayerAwareWindowInsets
+import com.metrolist.music.ui.screens.LocalPlayerAwareWindowInsets
 import com.metrolist.music.R
 import com.metrolist.music.constants.*
 import com.metrolist.music.ui.component.*

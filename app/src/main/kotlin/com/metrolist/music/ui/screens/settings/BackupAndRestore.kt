@@ -29,7 +29,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.metrolist.music.LocalPlayerAwareWindowInsets
+import com.metrolist.music.ui.screens.LocalPlayerAwareWindowInsets
 import com.metrolist.music.R
 import com.metrolist.music.db.entities.Song
 import com.metrolist.music.ui.component.IconButton

@@ -38,8 +38,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.metrolist.innertube.models.ArtistItem
-import com.metrolist.music.LocalDatabase
-import com.metrolist.music.LocalPlayerConnection
+import com.metrolist.music.ui.screens.LocalDatabase
+import com.metrolist.music.ui.screens.LocalPlayerConnection
 import com.metrolist.music.R
 import com.metrolist.music.db.entities.ArtistEntity
 import com.metrolist.music.playback.queues.YouTubeQueue

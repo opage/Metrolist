@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import com.metrolist.innertube.YouTube
 import com.metrolist.innertube.models.SongItem
-import com.metrolist.music.LocalDatabase
+import com.metrolist.music.ui.screens.LocalDatabase
 import com.metrolist.music.R
 import com.metrolist.music.constants.ListThumbnailSize
 import com.metrolist.music.db.entities.Playlist

@@ -34,8 +34,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.metrolist.innertube.models.WatchEndpoint
-import com.metrolist.music.LocalPlayerAwareWindowInsets
-import com.metrolist.music.LocalPlayerConnection
+import com.metrolist.music.ui.screens.LocalPlayerAwareWindowInsets
+import com.metrolist.music.ui.screens.LocalPlayerConnection
 import com.metrolist.music.R
 import com.metrolist.music.constants.StatPeriod
 import com.metrolist.music.extensions.togglePlayPause

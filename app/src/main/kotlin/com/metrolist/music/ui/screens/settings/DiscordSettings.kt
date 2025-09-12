@@ -56,8 +56,8 @@ import androidx.compose.ui.unit.sp
 import androidx.media3.common.Player.STATE_READY
 import androidx.navigation.NavController
 import coil3.compose.AsyncImage
-import com.metrolist.music.LocalPlayerAwareWindowInsets
-import com.metrolist.music.LocalPlayerConnection
+import com.metrolist.music.ui.screens.LocalPlayerAwareWindowInsets
+import com.metrolist.music.ui.screens.LocalPlayerConnection
 import com.metrolist.music.R
 import com.metrolist.music.constants.DiscordInfoDismissedKey
 import com.metrolist.music.constants.DiscordNameKey

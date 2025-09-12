@@ -54,10 +54,10 @@ import androidx.navigation.NavController
 import coil3.compose.AsyncImage
 import com.metrolist.innertube.YouTube
 import com.metrolist.innertube.models.SongItem
-import com.metrolist.music.LocalDatabase
-import com.metrolist.music.LocalDownloadUtil
-import com.metrolist.music.LocalPlayerConnection
-import com.metrolist.music.LocalSyncUtils
+import com.metrolist.music.ui.screens.LocalDatabase
+import com.metrolist.music.ui.screens.LocalDownloadUtil
+import com.metrolist.music.ui.screens.LocalPlayerConnection
+import com.metrolist.music.ui.screens.LocalSyncUtils
 import com.metrolist.music.R
 import com.metrolist.music.constants.ListItemHeight
 import com.metrolist.music.constants.ListThumbnailSize

@@ -112,11 +112,11 @@ import com.metrolist.innertube.YouTube
 import com.metrolist.innertube.models.SongItem
 import com.metrolist.innertube.utils.completed
 import kotlinx.coroutines.launch
-import com.metrolist.music.LocalDatabase
-import com.metrolist.music.LocalDownloadUtil
-import com.metrolist.music.LocalPlayerAwareWindowInsets
-import com.metrolist.music.LocalPlayerConnection
-import com.metrolist.music.LocalSyncUtils
+import com.metrolist.music.ui.screens.LocalDatabase
+import com.metrolist.music.ui.screens.LocalDownloadUtil
+import com.metrolist.music.ui.screens.LocalPlayerAwareWindowInsets
+import com.metrolist.music.ui.screens.LocalPlayerConnection
+import com.metrolist.music.ui.screens.LocalSyncUtils
 import com.metrolist.music.R
 import com.metrolist.music.constants.AlbumThumbnailSize
 import com.metrolist.music.constants.DarkModeKey

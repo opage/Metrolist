@@ -31,6 +31,7 @@ import com.metrolist.music.db.entities.Song
 import com.metrolist.music.extensions.toMediaItem
 import com.metrolist.music.extensions.toggleRepeatMode
 import com.metrolist.music.extensions.metadata
+import com.metrolist.music.models.toMediaItem
 import com.metrolist.music.playback.queues.ListQueue
 import com.metrolist.music.utils.reportException
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -454,7 +455,7 @@ constructor(
                 val queueTitle = context.getString(R.string.android_auto_search)
                 val listQueue = ListQueue(
                     title = queueTitle,
-                    items = queue.first.mapNotNull { it.metadata }
+                    items = queue.first.mapNotNull { it.metadata?.toMediaItem() }
                 )
                 service.playQueue(
                     queue = listQueue,

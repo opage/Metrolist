@@ -324,8 +324,8 @@ constructor(
 
             try {
                 val results = combine(
-                    database.searchSongs(query, previewSize = 50),
-                    database.searchArtists(query, previewSize = 20).map { artists ->
+                    database.searchSongs(query),
+                    database.searchArtists(query).map { artists ->
                         artists.flatMap { artist ->
                             database.artistSongsByCreateDateAsc(artist.id).first()
                         }
@@ -335,7 +335,6 @@ constructor(
                 }
 
                 val items = results.first()
-                    .take(50)
                     .map { it.toMediaItem(path = "${MusicService.SEARCH}/$query", isPlayable = true, isBrowsable = true) }
                 LibraryResult.ofItemList(items, params)
             } catch (e: Exception) {
@@ -431,8 +430,8 @@ constructor(
                     val searchQuery = path.getOrNull(1) ?: return@future defaultResult
                     
                     val results = combine(
-                        database.searchSongs(searchQuery, previewSize = 50),
-                        database.searchArtists(searchQuery, previewSize = 20).map { artists ->
+                        database.searchSongs(searchQuery),
+                        database.searchArtists(searchQuery).map { artists ->
                             artists.flatMap { artist ->
                                 database.artistSongsByCreateDateAsc(artist.id).first()
                             }
